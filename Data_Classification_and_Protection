@@ -1,0 +1,30 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "AllowAccessToClassifiedData",
+            "Effect": "Allow",
+            "Action": "s3:GetObject",
+            "Resource": [
+                "arn:aws:s3:::classified-data-bucket/level1/*",
+                "arn:aws:s3:::classified-data-bucket/level2/*"
+            ],
+            "Condition": {
+                "StringEquals": {
+                    "aws:username": "authorized-user"
+                }
+            }
+        },
+        {
+            "Sid": "DenyAccessToUnclassifiedData",
+            "Effect": "Deny",
+            "Action": "s3:GetObject",
+            "Resource": "arn:aws:s3:::unclassified-data-bucket/*",
+            "Condition": {
+                "StringNotEquals": {
+                    "aws:username": "unauthorized-user"
+                }
+            }
+        }
+    ]
+}
