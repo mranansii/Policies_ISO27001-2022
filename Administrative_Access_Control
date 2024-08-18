@@ -1,0 +1,26 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "AllowAdminAccess",
+            "Effect": "Allow",
+            "Action": [
+                "iam:*",
+                "ec2:*",
+                "s3:*"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "RequireMFA",
+            "Effect": "Deny",
+            "Action": "*",
+            "Resource": "*",
+            "Condition": {
+                "BoolIfExists": {
+                    "aws:MultiFactorAuthPresent": "false"
+                }
+            }
+        }
+    ]
+}
