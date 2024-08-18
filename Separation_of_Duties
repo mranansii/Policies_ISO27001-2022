@@ -1,0 +1,33 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "FinanceRoleAccess",
+            "Effect": "Allow",
+            "Action": [
+                "s3:GetObject",
+                "rds:DescribeDBInstances"
+            ],
+            "Resource": "*",
+            "Condition": {
+                "StringEquals": {
+                    "aws:username": "finance-user"
+                }
+            }
+        },
+        {
+            "Sid": "DenyNonFinanceUsers",
+            "Effect": "Deny",
+            "Action": [
+                "s3:GetObject",
+                "rds:DescribeDBInstances"
+            ],
+            "Resource": "*",
+            "Condition": {
+                "StringNotEquals": {
+                    "aws:username": "finance-user"
+                }
+            }
+        }
+    ]
+}
