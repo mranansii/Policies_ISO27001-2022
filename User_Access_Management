@@ -1,0 +1,24 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "AllowSpecificActions",
+            "Effect": "Allow",
+            "Action": [
+                "s3:GetObject",
+                "s3:ListBucket",
+                "ec2:DescribeInstances"
+            ],
+            "Resource": [
+                "arn:aws:s3:::example-bucket/*",
+                "arn:aws:ec2:region:account-id:instance/*"
+            ]
+        },
+        {
+            "Sid": "DenyAllOthers",
+            "Effect": "Deny",
+            "Action": "*",
+            "Resource": "*"
+        }
+    ]
+}
