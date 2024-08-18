@@ -1,0 +1,33 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "AllowIncidentResponseTeam",
+            "Effect": "Allow",
+            "Action": [
+                "cloudtrail:LookupEvents",
+                "logs:GetLogEvents"
+            ],
+            "Resource": "*",
+            "Condition": {
+                "StringEquals": {
+                    "aws:username": "incident-response-team"
+                }
+            }
+        },
+        {
+            "Sid": "DenyNonIncidentResponseTeam",
+            "Effect": "Deny",
+            "Action": [
+                "cloudtrail:LookupEvents",
+                "logs:GetLogEvents"
+            ],
+            "Resource": "*",
+            "Condition": {
+                "StringNotEquals": {
+                    "aws:username": "incident-response-team"
+                }
+            }
+        }
+    ]
+}
